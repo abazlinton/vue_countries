@@ -14,9 +14,9 @@
     <h2>Population of the world: {{ worldPopulation }}</h2>
 
       <label for="country_select">Select a Country:</label>
-      <select id="country_select" v-model="selectedCountry" v-on:change="setNeighbouringCountries">
+      <select id="country_select" v-model="selectedCountryIndex" v-on:change="updateSelectedCountry">
         <option disabled value="">Select a country</option>
-        <option v-for="country in countries" :value="country">{{country.name}}</option>
+        <option v-for="(country, index) in countries" :value="index">{{country.name}}</option>
       </select>
 
       <div id="selected_country" v-if="selectedCountry">

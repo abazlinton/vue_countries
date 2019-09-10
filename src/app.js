@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
         neighbours: []
       },
       favouriteCountries: [],
-      worldPopulation: 0
+      worldPopulation: 0,
+      selectedCountryIndex: 0
     },
     mounted(){
       this.getCountries()
@@ -22,6 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
           this.countries = countries
           this.calculateWorldPopulation()
         })
+      },
+      updateSelectedCountry: function(){
+        this.selectedCountry = this.countries[this.selectedCountryIndex]
+        this.setNeighbouringCountries()
       },
       addToFavourites: function(){
         this.favouriteCountries.push(this.selectedCountry)
