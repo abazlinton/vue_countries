@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Vue Countries</title>
+  <script src="./js/bundle.js"></script>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+  <h1>Countries App</h1>
+
+  <div id="app">
+
+    <h2>Population of the world: {{ worldPopulation }}</h2>
+
+      <label for="country_select">Select a Country:</label>
+      <select id="country_select" v-model="selectedCountry" v-on:change="setNeighbouringCountries">
+        <option disabled value="">Select a country</option>
+        <option v-for="country in countries" :value="country">{{country.name}}</option>
+      </select>
+
+      <div id="selected_country" v-if="selectedCountry">
+
+        <h2> {{selectedCountry.name}} </h2>
+        <p> Population: {{selectedCountry.population}} </p>
+        <img class="lrg-flag" :src="selectedCountry.flag" />
+        <button v-if="!favouriteCountries.includes(selectedCountry)" v-on:click="addToFavourites">Add Country</button>
+
+        <div v-if="selectedCountry.neighbours.length" id="neighbouring_countries"/>
+        <h3>Neighbouring Countries</h3>
+          <ul id="neighbouring_countries">
+            <li v-for="neighbour in selectedCountry.neighbours">
+              <p>{{neighbour.name}}</p>
+              <img class="med-flag" :src="neighbour.flag">
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div v-if="favouriteCountries.length" id="favourite_countries">
+        <h2>Favourite Countries</h2>
+        <ul>
+          <li v-for="favouriteCountry in favouriteCountries">{{favouriteCountry.name}} <img class="small-flag" :src="favouriteCountry.flag"/></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+  </html>
